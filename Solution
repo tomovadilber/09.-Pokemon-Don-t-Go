@@ -1,0 +1,89 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace firstProblemMidleExam
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            List<int> input = Console.ReadLine().Split(" ").Select(int.Parse).ToList();
+            int sum = 0;
+
+            
+
+
+            while (input.Count>0)
+            {
+                int indexes = int.Parse(Console.ReadLine());
+                int currentNum = 0;
+                
+
+                if (indexes<0)
+                {
+                    indexes = 0; // remove that one
+                    currentNum = input[indexes];
+                    sum += currentNum;
+                    input[0] = input[input.Count - 1];
+                    for (int i = 0; i < input.Count; i++)
+                    {
+                        if (input[i] <= currentNum)
+                        {
+                            input[i] += currentNum;
+                        }
+                        else if (input[i] > currentNum)
+                        {
+                            input[i] -= currentNum;
+                        }
+                    }
+                    
+                    
+
+                }
+                else if(indexes>input.Count-1)
+                {
+                    indexes = input.Count-1;
+                    currentNum = input[indexes];
+                    sum += currentNum;
+                    input[input.Count - 1] = input[0];
+                    for (int i = 0; i < input.Count; i++)
+                    {
+                        if (input[i] <= currentNum)
+                        {
+                            input[i] += currentNum;
+                        }
+                        else if (input[i] > currentNum)
+                        {
+                            input[i] -= currentNum;
+                        }
+                    }
+                    
+                    
+                }
+                else
+                {
+                    currentNum = input[indexes];
+                    sum += currentNum;
+                    for (int i = 0; i < input.Count; i++)
+                    {
+                        if (input[i] <= currentNum)
+                        {
+                            input[i] += currentNum;
+                        }
+                        else if (input[i] > currentNum)
+                        {
+                            input[i] -= currentNum;
+                        }
+                    }
+                    input.RemoveAt(indexes);
+                }
+            }
+
+            Console.WriteLine(sum);
+        }
+
+    }
+}
